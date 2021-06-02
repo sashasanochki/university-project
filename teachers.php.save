@@ -1,0 +1,32 @@
+<html>
+ <head>
+  <title>–°–∞–π—Ç –°–µ–≤–µ—Ä–æ-–í–æ—Å—Ç–æ—á–Ω–æ–≥–æ –§–µ–¥–µ—Ä–∞–ª—å–Ω–æ–≥–æ —É–Ω–∏–≤–µ—Ä—Å–∏—Ç–µ—Ç–∞</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ </head>
+ <body>
+	<?php
+	printf('<P>–°–æ—Å—Ç–∞–≤ –ø—Ä–µ–ø–æ–¥–∞–≤–∞—Ç–µ–ª–µ–π:</P>');
+	// ëÆ•§®≠Ô•¨·Ô, ¢Î°®‡†•¨ °†ß„ §†≠≠ÎÂ VER3
+
+	include('config.php');	
+	$link = mysqli_connect($server, $user, $password, $database)
+	    or die('Error: Unable to connect: ' . mysqli_connect_error()
+	
+	// ÇÎØÆ´≠Ô•¨ SQL-ß†Ø‡Æ·
+	$SQLquery = 'SELECT first_name, last_name  FROM teachers;';
+	$SQLresult = mysqli_query($link,$SQLquery);
+	while ($result = mysqli_fetch_array($SQLresult,MYSQLI_NUM))
+	{
+		printf('<P>Author: %s %s</P>',$result[1],$result[2],$result[5],$result[6]);
+	}
+	// é·¢Æ°Æ¶§†•¨ Ø†¨Ô‚Ï Æ‚ ‡•ß„´Ï‚†‚†
+	mysqli_free_result($SQLresult);
+	mysqli_close($link);
+
+?>
+
+<BR>
+<a href="index.html"> <P>GO BACK</P> </a>
+
+ </body>
+</html>
