@@ -1,33 +1,82 @@
 <html>
  <head>
-  <title>Сайт Северо-Восточного Федерального университета</title>
+ <link rel="stylesheet" href="style.css">
+  <title>Сайт первого в мире университета гулей</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
  </head>
- <body>
-<P style="color:black; font-size:20; font-weight:bold">
+<body>
+<P style="color:orange; font-size:26; font-weight: bold; font-family: 'Open Sans', sans-serif;">
 Состав наших дорогих преподавателей:
 </P>
-<meta charset="utf-8">
 
 	<?php
 	include('config.php');	
 	$link = mysqli_connect($server, $user, $password, $database)
 	    or die('Error: Unable to connect: ' . mysqli_connect_error());
 
-	$SQLquery = 'SELECT first_name, last_name,fathers_name, post.name FROM teachers INNER JOIN post ON teachers.post_id=post.id  ORDER BY post.id DESC;';
+	$SQLquery = 'SELECT teachers.id, first_name, last_name, fathers_name, post_name, ad_name FROM teachers INNER JOIN post ON teachers.post_id=post.id INNER JOIN academic_degree ON teachers.academic_degree_id=academic_degree.id ORDER BY post.id DESC;';
 	$SQLresult = mysqli_query($link,$SQLquery);
-	while ($row = mysqli_fetch_array($SQLresult))
-	{
-	printf( $row['first_name'] . " " . $row['last_name'].' '. $row['fathers_name'] . " -  " . $row['name']. " " . "<br>");
-	}
-	// �᢮������� ������ �� १����
+
+    echo "<table>";
+    echo "<tr><td><h1>Номер удостоверения</h1></td><td><h1>Фамилия</h1></td><td><h1>Имя</h1></td><td><h1>Отчество</h1></td><td><h1>Должность</h1></td><td><h1>Ученая степень</h1></td></tr>";
+		while ($row = mysqli_fetch_array($SQLresult))
+		{
+            $pole1=$row[0];
+            $pole2=$row[1];
+            $pole3=$row[2];
+            $pole4=$row[3];
+            $pole5=$row[4];
+            $pole6=$row[5];
+        echo "<tr><td><h1>$pole1</h1></td><td><h1>$pole2</h1></td><td><h1>$pole3</h1></td><td><h1>$pole4</h1></td><td><h1>$pole5</h1></td><td><h1>$pole6</h1></td></tr>";
+		}
 	mysqli_free_result($SQLresult);
 	mysqli_close($link);
-
+echo "</table>";
 ?>
+</P>
+
+<P style="color:orange; font-size:24; font-weight: bold; font-family: 'Open Sans', sans-serif;"> Выберите опции:</P>
+<table width=100%> 
+    <TR>
+        <TH> <h2> Добавление преподавателя </h2> </TH>
+        <TH> <h2> Поиск преподавателя по номеру удостоверения </h2> </TH>
+    </TR>
+    <TD>
+ <form action="add_teachers_form.php" method="post">
+ <BR>
+                                <h1>ID преподавателя: <input type="text" name="id"></h1>
+<BR>
+                                <h1>Фамилия: <input type="text" name="first_name"></h1>
+<BR>
+								<h1>Имя: <input type="text" name="last_name"></h1>
+<BR>
+								<h1>Отчество (если есть): <input type="text" name="fathers_name"></h1>
+<BR>
+								<a href="post.php"><h1>ID должности (нажмите, чтобы узнать): <input type="text" name="post_id"></h1></a>
+<BR>
+								<a href="ad.php"><h1>ID ученой степени (нажмите, чтобы узнать): <input type="text" name="academic_degree_id"></h1></a>
+<BR>
+    <input type="submit" value="Добавим!">
+    </form>
+
+    </TD>
+
+    <TD>
+    <form action="search_teachers_form.php" method="post"><center>
+    <BR> 
+        <h1>Введите ID: <input type="text" name="id">
+    <input type="submit" value="Поиск"></center>
+                          </form>
+    </TD>
+    </table>
 
 <BR>
-<a href="index.html"> <P>Назад</P> </a>
+
+            </TD>
+            </TR>
+<BR>
+<a style="color:yellow; font-size:25px; font-weight: bold; font-family: 'Open Sans', sans-serif;"  href="index.html"> <P> Назад </P> </a>
 
  </body>
 </html>
