@@ -38,19 +38,18 @@
             echo "</table>";
             ?>
 </P>
-<table width=100% cellspacing="3" border="3";> 
+<table width=100%> 
     <TR>
         <TH> <h2> Поиск занятий по дате </h2> </TH>
         <TH> <h2> Добавить в расписание! </h2> </TH>
         <TH> <h2> Обновление данных </h2> </TH>
-        <TH> <h2> Удаление данных из БД </h2> </TH>
     </TR>
 
             <TD>
             <form action="search_lesson_form.php" method="post"><center>
             <BR> 
                 <h1>Введите ID: <input type="date" name="lesson_date">
-            <input type="submit" value="Поиск"></center>    
+            <input type="submit" value="Поиск"></center>
                                 </form>
             </TD>
             
@@ -238,26 +237,9 @@
                                     mysqli_free_result($SQLresult);
 ?>
 		</select><br>
-        <input type="submit" value="Обновить!"> <br>
+    <input type="submit" value="Обновить!"> <br>
             </form>
-        <TD>
-    <form action="delete_lesson.php" method="post">
-    <h1> ID <select name="id">
-                                <?php
-                                include('config.php');
-                                $link = mysqli_connect($server, $user, $password, $database)
-                                         or die('Error: Unable to connect: ' . mysqli_connect_error());
-                                $SQLquery = "select id as s1, id as s2 from lesson order by id;";
-                                $SQLresult = mysqli_query($link,$SQLquery);
-                                while ($result1 = mysqli_fetch_array($SQLresult,MYSQLI_NUM))
-			                        {
-				                            printf('<option value=%d>%d </option>',$result1[0],$result1[1]);
-			                        }
-                                    mysqli_free_result($SQLresult);
-?></h1>
-</select>
-<input type="submit" value="Удалить"> <br>
-            </form>
+    </TD>
             </table>
 <a style="color:yellow; font-size:25px; font-weight: bold; font-family: 'Open Sans', sans-serif;"  href="index.html"> <P> Назад </P> </a>
 

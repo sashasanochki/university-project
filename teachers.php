@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
  </head>
-<body>
+ <body link="red" vlink="blue">
 <P style="color:orange; font-size:26; font-weight: bold; font-family: 'Open Sans', sans-serif;">
 Состав наших дорогих преподавателей:
 </P>
@@ -37,10 +37,11 @@ echo "</table>";
 </P>
 
 <P style="color:orange; font-size:24; font-weight: bold; font-family: 'Open Sans', sans-serif;"> Выберите опции:</P>
-<table width=100%> 
+<table width=100% cellspacing="3" border="3";"> 
     <TR>
         <TH> <h2> Добавление преподавателя </h2> </TH>
         <TH> <h2> Поиск преподавателя по номеру удостоверения </h2> </TH>
+        <TH> <h2> Обновление данных </h2> </TH>
     </TR>
     <TD>
  <form action="add_teachers_form.php" method="post">
@@ -53,9 +54,9 @@ echo "</table>";
 <BR>
 								<h1>Отчество (если есть): <input type="text" name="fathers_name"></h1>
 <BR>
-								<a href="post.php"><h1>ID должности (нажмите, чтобы узнать): <input type="text" name="post_id"></h1></a>
+								<a href="post.php"><h1>ID должности (нажмите, чтобы узнать):</a> <input type="text" name="post_id"></h1>
 <BR>
-								<a href="ad.php"><h1>ID ученой степени (нажмите, чтобы узнать): <input type="text" name="academic_degree_id"></h1></a>
+								<a href="ad.php"><h1>ID ученой степени (нажмите, чтобы узнать):</a> <input type="text" name="academic_degree_id"></h1>
 <BR>
     <input type="submit" value="Добавим!">
     </form>
@@ -69,8 +70,38 @@ echo "</table>";
     <input type="submit" value="Поиск"></center>
                           </form>
     </TD>
-    </table>
 
+
+    <TD>
+    <form action="update_teachers_form.php" method="post">
+
+    <h1>ID препода:<select name="id">
+                                <?php
+                                include('config.php');
+                                $link = mysqli_connect($server, $user, $password, $database)
+                                         or die('Error: Unable to connect: ' . mysqli_connect_error());
+                                $SQLquery = "SELECT id,  CONCAT( id, ' ', first_name, ' ',last_name) FROM teachers";
+                                $SQLresult = mysqli_query($link,$SQLquery);
+                                while ($result1 = mysqli_fetch_array($SQLresult,MYSQLI_NUM))
+			                        {
+				                            printf('<option value=%d>%s %s</option>',$result1[0],$result1[1],$result[2]);
+			                        }
+                                    mysqli_free_result($SQLresult);
+?></h1>
+</select>
+<br>
+
+    <h1>Фамилия:<input type="text" name="first_name"><br><br></h1>
+
+    <h1>Имя:<input type="text" name="last_name"><br><br></h1>
+
+    <h1>Отчество:<input type="text" name="fathers_name"><br><br></h1>
+
+    <input type="submit" value="Обновить!"> <br>
+            </form>
+    </TD>
+ 
+    </table>
 <BR>
 
             </TD>

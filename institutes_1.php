@@ -32,7 +32,7 @@
 
 
 <BR>
-<a style="color:yellow; font-size:25px; font-weight: bold; font-family: 'Open Sans', sans-serif;"  href="index.html"> <P> Назад </P> </a>
+<a style="color:yellow; font-size:25px; font-weight: bold; font-family: 'Open Sans', sans-serif;"  href="groups.php"> <P> Назад </P> </a>
 
  </body>
 </html>
